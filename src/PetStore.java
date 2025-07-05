@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class PetStore {
     private static final String ROW_BREAK = "+----------------------+";
@@ -23,6 +25,21 @@ public class PetStore {
             printPet(pet);
         }
         System.out.println(ROW_BREAK);
+    }
+
+    public ArrayList<Pet> searchPets(Predicate<Pet> predicate) {
+        //return this.pets.clone().removeIf(predicate.negate()); can't do this in java because .removeIf is an in-place method that returns true :(
+        ArrayList<Pet> result = (ArrayList<Pet>) this.pets.clone();
+        result.removeIf(predicate.negate());
+        return result;
+    }
+
+    public ArrayList<Pet> searchPets(String name) {
+        return searchPets(pet -> pet.getName().equalsIgnoreCase(name));
+    }
+
+    public ArrayList<Pet> searchPets(byte age) {
+        return searchPets(pet -> pet.getAge() == age);
     }
 
     public void printPets() {
