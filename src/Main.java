@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -10,8 +11,9 @@ public class Main {
         System.out.println("2) Add more pets");
         /*System.out.println("3) Update an existing pet");
         System.out.println("4) Remove an existing pet");
+         */
         System.out.println("5) Search pets by name");
-        System.out.println("6) Search pets by age");*/
+        System.out.println("6) Search pets by age");
         System.out.println("7) Exit Program");
     }
 
@@ -33,13 +35,14 @@ public class Main {
             case 4:
                 removePet();
                 break;
+
+                 */
             case 5:
                 searchPetsByName();
                 break;
             case 6:
                 searchPetsByAge();
                 break;
-                 */
             case 7:
                 System.out.println("Goodbye!");
                 System.exit(0);
@@ -49,6 +52,21 @@ public class Main {
                 break;
         }
 
+    }
+
+    private static void searchPetsByName() {
+        System.out.print("Enter a name to search: ");
+        String name = scanner.nextLine();
+        ArrayList<Pet> results = petStore.searchPets(name);
+        petStore.printPets(results);
+    }
+
+    private static void searchPetsByAge() {
+        System.out.print("Enter age to search: ");
+        String input = scanner.nextLine();
+        byte age = Byte.parseByte(input);
+        ArrayList<Pet> results = petStore.searchPets(age);
+        petStore.printPets(results);
     }
 
     private static void addPet() {
