@@ -41,12 +41,29 @@ public class PetStore {
         return searchPets(pet -> pet.getAge() == age);
     }
 
+    public Pet getPet(int id) {
+        for (Pet pet : this.pets) {
+            if (pet.getID() == id) {
+                return pet;
+            }
+        }
+        return null;
+    }
+
     public void printPets() {
         this.printPets(this.pets);
     }
 
     public void addPet(Pet pet) {
         this.pets.add(pet);
+    }
+
+    public void removePet(Pet pet) {
+        this.pets.removeIf(pet1 -> pet1 == pet);
+    }
+
+    public void removePet(int id) {
+        this.pets.removeIf(pet -> pet.getID() == id);
     }
 
     public PetStore() {

@@ -9,9 +9,8 @@ public class Main {
         System.out.println("What would you like to do?");
         System.out.println("1) View all pets");
         System.out.println("2) Add more pets");
-        /*System.out.println("3) Update an existing pet");
+        System.out.println("3) Update an existing pet");
         System.out.println("4) Remove an existing pet");
-         */
         System.out.println("5) Search pets by name");
         System.out.println("6) Search pets by age");
         System.out.println("7) Exit Program");
@@ -28,15 +27,12 @@ public class Main {
             case 2:
                 addPet();
                 break;
-                /*
             case 3:
                 updatePet();
                 break;
             case 4:
                 removePet();
                 break;
-
-                 */
             case 5:
                 searchPetsByName();
                 break;
@@ -52,6 +48,35 @@ public class Main {
                 break;
         }
 
+    }
+
+    private static void updatePet() {
+        petStore.printPets();
+        System.out.println("Enter the ID of the pet you want to update: ");
+        String input = scanner.nextLine();
+        int id = Integer.parseInt(input);
+        Pet pet = petStore.getPet(id);
+        if (pet == null) {
+            System.out.println("Pet with ID " + id + " not found.");
+        } else {
+            System.out.println("Enter new name and new age (name, age): ");
+            input = scanner.nextLine();
+            String[] split = input.split(",");
+            byte age = Byte.parseByte(split[1].trim());
+            String name = split[0];
+            pet.setName(name);
+            pet.setAge(age);
+        }
+
+    }
+
+    private static void removePet() {
+        petStore.printPets();
+        System.out.println("Enter the ID of the pet you want to remove: ");
+        String input = scanner.nextLine();
+        int id = Integer.parseInt(input);
+        petStore.removePet(id);
+        System.out.println("Removed pet with ID " + id);
     }
 
     private static void searchPetsByName() {
