@@ -50,6 +50,10 @@ public class PetStore {
         return null;
     }
 
+    public ArrayList<Pet> getPets() {
+        return this.pets;
+    }
+
     public void printPets() {
         this.printPets(this.pets);
     }
