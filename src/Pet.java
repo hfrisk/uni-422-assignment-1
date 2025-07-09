@@ -1,4 +1,6 @@
-public class Pet {
+import java.io.Serializable;
+
+public class Pet implements Serializable {
     private static int highestID = 0;
     private final int ID;
     private byte age; //No need for an int. I doubt anyone's keeping a Greenland shark around as a pet.
