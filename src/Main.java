@@ -1,6 +1,4 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -142,10 +140,26 @@ public class Main {
     }
 
     public static void loadData() {
-
+        try {
+            FileInputStream file = new FileInputStream("db");
+            ObjectInputStream in = new ObjectInputStream(file);
+            boolean reading = true;
+            while (reading) {
+                try {
+                    Pet pet = (Pet) in.readObject();
+                    petStore.addPet(pet);
+                } catch (EOFException e) {
+                    reading = false;
+                    in.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
+        loadData();
         scanner.useDelimiter(System.lineSeparator());
         //noinspection InfiniteLoopStatement
         while (true) {
