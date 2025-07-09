@@ -1,3 +1,6 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,8 +43,7 @@ public class Main {
                 searchPetsByAge();
                 break;
             case 7:
-                System.out.println("Goodbye!");
-                System.exit(0);
+                saveAndQuit();
                 break;
             default:
                 System.out.println("Invalid option.");
@@ -107,6 +109,36 @@ public class Main {
             Pet newPet = new Pet(name, age);
             petStore.addPet(newPet);
         }
+    }
+
+    public static void saveAndQuit() {
+        FileOutputStream file;
+        ObjectOutputStream out;
+        try {
+            file = new FileOutputStream("database.csv");
+            out = new ObjectOutputStream(file);
+        } catch (IOException e) {
+            System.out.println("Unable to create file database.csv. Reason:");
+            System.out.println(e.getMessage());
+            return;
+        }
+        for (Pet pet : petStore.getPets()) {
+            try {
+                out.writeObject(pet);
+            } catch (Exception e) {
+                System.out.println("Unable to save pet " + pet.getID() + " " + pet.getName()); //I wish Java had nice string interpolation. :|
+                System.out.println(e.getMessage());
+            }
+        }
+        try {
+            out.close();
+            file.close();
+        } catch (IOException e) {
+            System.out.println("Unable to save file database.csv");
+            System.out.println(e.getMessage());
+            return;
+        }
+        System.exit(0);
     }
 
     public static void main(String[] args) {
