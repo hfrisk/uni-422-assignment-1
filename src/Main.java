@@ -115,10 +115,10 @@ public class Main {
         FileOutputStream file;
         ObjectOutputStream out;
         try {
-            file = new FileOutputStream("database.csv");
+            file = new FileOutputStream("db");
             out = new ObjectOutputStream(file);
         } catch (IOException e) {
-            System.out.println("Unable to create file database.csv. Reason:");
+            System.out.println("Unable to create file db. Reason:");
             System.out.println(e.getMessage());
             return;
         }
@@ -134,11 +134,15 @@ public class Main {
             out.close();
             file.close();
         } catch (IOException e) {
-            System.out.println("Unable to save file database.csv");
+            System.out.println("Unable to save file db");
             System.out.println(e.getMessage());
             return;
         }
         System.exit(0);
+    }
+
+    public static void loadData() {
+
     }
 
     public static void main(String[] args) {
