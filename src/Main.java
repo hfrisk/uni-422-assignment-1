@@ -101,11 +101,23 @@ public class Main {
             if (input.equals("done")) {
                 return;
             }
-            String[] split = input.split(",");
-            byte age = Byte.parseByte(split[1].trim());
-            String name = split[0];
-            Pet newPet = new Pet(name, age);
-            petStore.addPet(newPet);
+            try {
+                String[] split = input.split(",");
+                if (split.length != 2) {
+                    throw new Exception("Formatting error.");
+                }
+                byte age = Byte.parseByte(split[1].trim());
+                if (age < 1 || age > 20) {
+                    throw new Exception("Age must be between 1 and 20.");
+                }
+                String name = split[0];
+                Pet newPet = new Pet(name, age);
+                petStore.addPet(newPet);
+            } catch (NumberFormatException e) {
+                System.out.println("Failed to parse age.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
