@@ -56,7 +56,14 @@ public class PetStore {
         this.printPets(this.pets);
     }
 
-    public void addPet(Pet pet) {
+    public int getSize() {
+        return this.pets.size();
+    }
+
+    public void addPet(Pet pet) throws Exception {
+        if (this.getSize() >= 5) {
+            throw new Exception("Database is full");
+        }
         this.pets.add(pet);
     }
 

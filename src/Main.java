@@ -95,7 +95,7 @@ public class Main {
     }
 
     private static void addPet() {
-        while (true) {
+        while (petStore.getSize() < 5) {
             System.out.print("add pet (name, age): ");
             String input = scanner.nextLine();
             if (input.equals("done")) {
