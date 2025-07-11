@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 public class PetStore {
@@ -39,11 +40,11 @@ public class PetStore {
         return searchPets(pet -> pet.getAge() == age);
     }
 
-    public Pet getPet(int id) throws IndexOutOfBoundsException {
+    public Pet getPet(int id) throws IndexOutOfBoundsException, NoSuchElementException  {
         if (id < 0 || id > 4) {
             throw new IndexOutOfBoundsException("Pet ID must be between 0 and 4");
         }
-        return this.pets.stream().filter(pet -> pet.getID() == id).findFirst().orElse(null);
+        return this.pets.stream().filter(pet -> pet.getID() == id).findFirst().orElseThrow(() -> new NoSuchElementException("Pet not found."));
     }
 
     public ArrayList<Pet> getPets() {
