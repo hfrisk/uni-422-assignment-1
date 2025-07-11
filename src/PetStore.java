@@ -20,9 +20,7 @@ public class PetStore {
 
     public void printPets(ArrayList<Pet> pets) {
         printHeader();
-        for (Pet pet : pets) {
-            printPet(pet);
-        }
+        pets.forEach(this::printPet);
         System.out.println(ROW_BREAK);
     }
 
