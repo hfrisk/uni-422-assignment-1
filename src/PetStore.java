@@ -39,13 +39,11 @@ public class PetStore {
         return searchPets(pet -> pet.getAge() == age);
     }
 
-    public Pet getPet(int id) {
-        for (Pet pet : this.pets) {
-            if (pet.getID() == id) {
-                return pet;
-            }
+    public Pet getPet(int id) throws IndexOutOfBoundsException {
+        if (id < 0 || id > 4) {
+            throw new IndexOutOfBoundsException("Pet ID must be between 0 and 4");
         }
-        return null;
+        return this.pets.stream().filter(pet -> pet.getID() == id).findFirst().orElse(null);
     }
 
     public ArrayList<Pet> getPets() {
